@@ -45,11 +45,11 @@ export default {
 			scale: 2,
 		},
 	},
-	H5: {
+	L5: {
 		type: 'spine',
 		src: {
 			atlas: new URL('../../assets/spines/symbols/symbols.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/symbols/h5.json', import.meta.url).href,
+			skeleton: new URL('../../assets/spines/symbols/l4.json', import.meta.url).href,
 			scale: 2,
 		},
 	},
@@ -85,11 +85,11 @@ export default {
 			scale: 2,
 		},
 	},
-	M: {
+	blocker_destroy: {
 		type: 'spine',
 		src: {
 			atlas: new URL('../../assets/spines/symbols2/symbols2.atlas', import.meta.url).href,
-			skeleton: new URL('../../assets/spines/symbols2/M.json', import.meta.url).href,
+			skeleton: new URL('../../assets/spines/symbols2/S.json', import.meta.url).href,
 			scale: 2,
 		},
 	},

@@ -11,14 +11,14 @@ export default {
 			feature: true,
 			buyBonus: false,
 			rtp: 0.96,
-			max_win: 10000.0,
+			max_win: 25000.0,
 		},
 		bonus: {
 			cost: 100.0,
 			feature: false,
 			buyBonus: true,
 			rtp: 0.96,
-			max_win: 10000.0,
+			max_win: 25000.0,
 		},
 	},
 	// Megaways - no paylines, consecutive reel matching left-to-right
@@ -177,8 +177,8 @@ export default {
 	},
 
 	paddingReels: {
-		basegame: '',
-		freegame: '',
-		bonusgame: '',
+		basegame: [] as { name: string }[][],
+		freegame: [] as { name: string }[][],
+		bonusgame: [] as { name: string }[][],
 	},
 };

@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { type Snippet } from 'svelte';
+	import { onMount, type Snippet } from 'svelte';
 	import { GlobalStyle } from 'components-ui-html';
 	import { Authenticate, LoaderStakeEngine, LoaderExample, LoadI18n } from 'components-shared';
+	import { stateBet, stateConfig } from 'state-shared';
 	import Game from '../components/Game.svelte';
 	import { setContext } from '../game/context';
 
@@ -16,23 +17,40 @@
 	const loaderUrlStakeEngine = new URL('../../stake-engine-loader.gif', import.meta.url).href;
 	const loaderUrl = new URL('../../loader.gif', import.meta.url).href;
 
+	// Dev mode: skip auth when no sessionID is provided
+	const isDev = import.meta.env.DEV && !new URLSearchParams(window.location.search).has('sessionID');
+
 	setContext();
+
+	onMount(() => {
+		if (isDev) {
+			stateBet.currency = 'USD';
+			stateBet.balanceAmount = 10000;
+			stateConfig.betAmountOptions = [1, 2, 5, 10, 20, 50, 100];
+			stateConfig.betMenuOptions = [1, 5, 10, 50, 100];
+			stateBet.betAmount = 1;
+		}
+	});
 </script>
 
 <GlobalStyle>
-	<Authenticate>
+	{#if isDev}
 		<LoadI18n {messagesMap}>
 			<Game />
 		</LoadI18n>
-	</Authenticate>
+	{:else}
+		<Authenticate>
+			<LoadI18n {messagesMap}>
+				<Game />
+			</LoadI18n>
+		</Authenticate>
+
+		<LoaderStakeEngine src={loaderUrlStakeEngine} oncomplete={() => (showYourLoader = true)} />
+
+		{#if showYourLoader}
+			<LoaderExample src={loaderUrl} />
+		{/if}
+	{/if}
 </GlobalStyle>
-
-<LoaderStakeEngine src={loaderUrlStakeEngine} oncomplete={() => (showYourLoader = true)} />
-
-{#if showYourLoader}
-	<LoaderExample src={loaderUrl} />
-	<!-- '/loader.gif' is served from static folder of sveltekit -->
-	<!-- File location: apps/scatter/static/loader.gif -->
-{/if}
 
 {@render props.children()}
