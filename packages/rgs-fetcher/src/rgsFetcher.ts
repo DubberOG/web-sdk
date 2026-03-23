@@ -13,7 +13,7 @@ export const rgsFetcher = {
 		const response = await fetcher({
 			method: 'POST',
 			variables: options.variables,
-			endpoint: `https://${options.rgsUrl}${options.url}`,
+			endpoint: options.rgsUrl.startsWith('http') ? `${options.rgsUrl}${options.url}` : `https://${options.rgsUrl}${options.url}`,
 		});
 
 		if (response.status !== 200) console.error('error', response);
@@ -26,7 +26,7 @@ export const rgsFetcher = {
 	>(options: { url: T; rgsUrl: string }): Promise<TResponse> {
 		const response = await fetcher({
 			method: 'GET',
-			endpoint: `https://${options.rgsUrl}${options.url}`,
+			endpoint: options.rgsUrl.startsWith('http') ? `${options.rgsUrl}${options.url}` : `https://${options.rgsUrl}${options.url}`,
 		});
 
 		if (response.status !== 200) console.error('error', response);

@@ -3,8 +3,8 @@ export default {
 	gameName: 'coincraft',
 	gameID: 'coincraft',
 	rtp: 0.96,
-	numReels: 6,
-	numRows: [4, 4, 4, 4, 4, 4],
+	numReels: 5,
+	numRows: [4, 4, 4, 4, 4],
 	betModes: {
 		base: {
 			cost: 1.0,
